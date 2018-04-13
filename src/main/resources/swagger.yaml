@@ -1,0 +1,220 @@
+swagger: '2.0'
+info:
+  description: |-
+    This is an example implementation of API for testing candidates
+     - You DON'T need to implement `/integrationTest` and `/status` endpoints
+    - You can run automated integration tests against your API using `/integrationTest` endpoint
+  version: '1.0'
+  title: Auto & General test API
+basePath: /test/1.0/
+tags:
+  - name: tasks
+    description: General algorithmic tasks
+  - name: todo
+    description: To Do List endpoints
+paths:
+  /tasks/validateBrackets:
+    get:
+      tags:
+        - tasks
+      summary: Checks if brackets in a string are balanced
+      description: |-
+        Brackets in a string are considered to be balanced if the following criteria are met:
+        - For every opening bracket (i.e., **`(`**, **`{`**, or **`[`**), there is a matching closing bracket (i.e., **`)`**, **`}`**, or **`]`**) of the same type (i.e., **`(`** matches **`)`**, **`{`** matches **`}`**, and **`[`** matches **`]`**). An opening bracket must appear before (to the left of) its matching closing bracket. For example, **`]{}[`** is not balanced.
+        - No unmatched braces lie between some pair of matched bracket. For example, **`({[]})`** is balanced, but **`{[}]`** and **`[{)]`** are not balanced.
+      schemes:
+        - http
+        - https
+      produces:
+        - application/json
+      parameters:
+        - name: input
+          in: query
+          description: Input string (max length 50)
+          required: true
+          type: string
+          minLength: 1
+          maxLength: 50
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BalanceTestResult'
+        '400':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ToDoItemValidationError'
+  /todo:
+    post:
+      tags:
+        - todo
+      summary: Create a to do item
+      schemes:
+        - http
+        - https
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ToDoItemAddRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ToDoItemValidationError'
+  '/todo/{id}':
+    get:
+      tags:
+        - todo
+      summary: Retrieve a specific item by id
+      schemes:
+        - http
+        - https
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ToDoItemValidationError'
+        '404':
+          description: Not Found Error
+          schema:
+            $ref: '#/definitions/ToDoItemNotFoundError'
+    patch:
+      tags:
+        - todo
+      summary: Modify an item
+      schemes:
+        - http
+        - https
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: number
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ToDoItemUpdateRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ToDoItem'
+        '400':
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ToDoItemValidationError'
+        '404':
+          description: Not Found Error
+          schema:
+            $ref: '#/definitions/ToDoItemNotFoundError'
+definitions:
+  BalanceTestResult:
+    type: object
+    properties:
+      input:
+        type: string
+        example: '[(]'
+      isBalanced:
+        type: boolean
+        example: false
+  ToDoItem:
+    type: object
+    properties:
+      id:
+        type: number
+        example: 42
+      text:
+        type: string
+        example: Uulwi ifis halahs gag erh'ongg w'ssh.
+      isCompleted:
+        type: boolean
+        example: false
+      createdAt:
+        type: string
+        example: '2017-10-13T01:50:58.735Z'
+  ToDoItemValidationError:
+    type: object
+    properties:
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            location:
+              type: string
+            param:
+              type: string
+            msg:
+              type: string
+            value:
+              type: string
+          example:
+            location: params
+            param: text
+            msg: Must be between 1 and 50 chars long
+            value: ''
+      name:
+        type: string
+        example: ValidationError
+  ToDoItemNotFoundError:
+    type: object
+    properties:
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            message:
+              type: string
+          example:
+            message: Item with 9 not found
+      name:
+        type: string
+        example: NotFoundError
+  ToDoItemAddRequest:
+    type: object
+    properties:
+      text:
+        type: string
+        example: Uulwi ifis halahs gag erh'ongg w'ssh.
+        minLength: 1
+        maxLength: 50
+  ToDoItemUpdateRequest:
+    type: object
+    properties:
+      text:
+        type: string
+        example: Uulwi ifis halahs gag erh'ongg w'ssh.
+        minLength: 1
+        maxLength: 50
+      isCompleted:
+        type: boolean
+        example: true
