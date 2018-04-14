@@ -10,9 +10,12 @@
   **-Maven build**<br>
 
 # start it
-  mvn clean package<br>
-  
-  java -jar codeTest-0.1.0.jar<br>
+  1. ```git clone``` source code from gitHub;
+  2. import project into Intellij by open source code directory;
+  3. execute ```mvn compile``` to trigger swagger code gen plugin to generate code;
+  4. configure "project structure" to add ```target/generated-sources/swagger/src/main/java``` as ```sources```, and choose ```java1.8``` as project SDK;
+  5. execute ```mvn clean package```;
+  6. start application. It can be started by ```java -jar codeTest-0.1.0.jar```, or by right click ```Application.java``` and click ```Run Application.main()```.
   
 # endpoints:  
 
