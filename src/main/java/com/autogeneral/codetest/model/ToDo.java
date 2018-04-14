@@ -67,4 +67,24 @@ public class ToDo {
                 ", createdAt=" + createdAt +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ToDo toDo = (ToDo) o;
+
+        if (id != null ? !id.equals(toDo.id) : toDo.id != null) return false;
+        if (text != null ? !text.equals(toDo.text) : toDo.text != null) return false;
+        return isCompleted != null ? isCompleted.equals(toDo.isCompleted) : toDo.isCompleted == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (isCompleted != null ? isCompleted.hashCode() : 0);
+        return result;
+    }
 }
