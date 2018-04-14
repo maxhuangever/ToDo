@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class ValidateBracketsServiceTest {
     ValidateBracketsService validateBracketsService = new ValidateBracketsService();
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "{index}: \"{0}\" balance check will return {1}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {"[]", true},
