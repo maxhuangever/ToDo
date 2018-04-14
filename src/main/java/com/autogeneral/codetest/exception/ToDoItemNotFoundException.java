@@ -1,7 +1,8 @@
 package com.autogeneral.codetest.exception;
 
-import com.autogeneral.codeTest.model.rest.ToDoItemNotFoundError;
-import com.autogeneral.codeTest.model.rest.ToDoItemNotFoundErrorDetails;
+
+import com.autogeneral.codetest.model.rest.ToDoItemNotFoundError;
+import com.autogeneral.codetest.model.rest.ToDoItemNotFoundErrorDetails;
 
 import java.util.ArrayList;
 import java.util.List;

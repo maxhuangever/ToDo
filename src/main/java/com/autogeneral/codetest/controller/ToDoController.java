@@ -1,9 +1,9 @@
 package com.autogeneral.codetest.controller;
 
-import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
 import com.autogeneral.codetest.common.StringValidator;
 import com.autogeneral.codetest.exception.ToDoItemValidationException;
 import com.autogeneral.codetest.model.ToDo;
+import com.autogeneral.codetest.model.rest.ToDoItemValidationError;
 import com.autogeneral.codetest.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

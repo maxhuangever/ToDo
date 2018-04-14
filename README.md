@@ -2,11 +2,11 @@
 
 ## Features ##
   **-implemented with spring boot + java 8**<br>
-  **-implemented /tasks, /todo and /integrationTest endpoints**<br>
-  **-unit tests implemented**<br>
-  **-integration test implemented**<br>
-  **-support Hibernate ORM mapping to H2 database**<br>
-  **-support swagger code gen plugin**<br>
+  **-support /tasks, /todo and /integrationTest endpoints**<br>
+  **-support unit tests**<br>
+  **-support integration test**<br>
+  **-support JPA ORM mapping to H2 database**<br>
+  **-support swagger code generation plugin**<br>
   **-Maven build**<br>
 
 # start it
@@ -15,7 +15,7 @@
   3. execute ```mvn compile``` to trigger swagger code gen plugin to generate code;
   4. configure "project structure" to add ```target/generated-sources/swagger/src/main/java``` as ```sources```, and choose ```java1.8``` as project SDK;
   5. execute ```mvn clean package```;
-  6. start application. It can be started by ```java -jar codeTest-0.1.0.jar```, or by right click ```Application.java``` and click ```Run Application.main()```.
+  6. start application. It can be started by ```java -jar codetest-0.1.0.jar```, or by right click ```Application.java``` and click ```Run Application.main()```.
   
 # endpoints:  
 
@@ -105,6 +105,8 @@ return:
 ```
 
 ## Run integration tests against remote API
+**Notice:**IntegrationTest endpoint does not require ```createAt field``` in ```result``` and ```expected``` have same value.<br>
+
 url:<br>
 `/integrationTest`<br>
 
