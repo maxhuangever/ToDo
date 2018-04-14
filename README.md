@@ -9,6 +9,9 @@
   **-support swagger code generation plugin**<br>
   **-Maven build**<br>
 
+## Deploy base url:
+  **http://ec2-54-89-237-241.compute-1.amazonaws.com:8090**
+
 # start it
   1. ```git clone``` source code from gitHub;
   2. import project into Intellij by open source code directory;
