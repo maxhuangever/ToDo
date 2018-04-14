@@ -1,7 +1,7 @@
 package com.autogeneral.codetest.common;
 
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationErrorDetails;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationErrorDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

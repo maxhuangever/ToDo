@@ -1,6 +1,6 @@
 package com.autogeneral.codetest.controller;
 
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
 import com.autogeneral.codetest.common.StringValidator;
 import com.autogeneral.codetest.service.ValidateBracketsService;
 import org.junit.Test;

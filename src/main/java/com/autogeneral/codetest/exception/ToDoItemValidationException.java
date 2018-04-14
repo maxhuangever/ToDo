@@ -1,6 +1,6 @@
 package com.autogeneral.codetest.exception;
 
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
 
 public class ToDoItemValidationException extends BaseException {
     private static String DEFAULT_ERROR_NAME= "ValidationError";

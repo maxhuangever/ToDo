@@ -1,6 +1,6 @@
 package com.autogeneral.codetest.common;
 
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

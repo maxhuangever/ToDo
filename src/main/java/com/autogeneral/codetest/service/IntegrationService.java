@@ -1,6 +1,6 @@
 package com.autogeneral.codetest.service;
 
-import com.autoGeneral.codeTest.model.rest.*;
+import com.autogeneral.codeTest.model.rest.*;
 import com.autogeneral.codetest.model.ToDo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

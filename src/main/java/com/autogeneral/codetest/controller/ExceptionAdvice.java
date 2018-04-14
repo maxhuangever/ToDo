@@ -1,7 +1,7 @@
 package com.autogeneral.codetest.controller;
 
-import com.autoGeneral.codeTest.model.rest.ToDoItemNotFoundError;
-import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
+import com.autogeneral.codeTest.model.rest.ToDoItemNotFoundError;
+import com.autogeneral.codeTest.model.rest.ToDoItemValidationError;
 import com.autogeneral.codetest.exception.ToDoItemNotFoundException;
 import com.autogeneral.codetest.exception.ToDoItemValidationException;
 import org.springframework.http.HttpStatus;
