@@ -4,18 +4,11 @@ import com.autoGeneral.codeTest.model.rest.*;
 import com.autogeneral.codetest.model.ToDo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
@@ -36,17 +29,15 @@ public class IntegrationService {
 
     private static ToDo expected = new ToDo();
     private static String toDoText = "sample text";
-    private static boolean isCompleted = false;
 
     static {
         expected.setText(toDoText);
-        expected.setIsCompleted(isCompleted);
+        expected.setIsCompleted(false);
         expected.setCreatedAt(Calendar.getInstance().getTime());
     }
 
     public Object test(String baseUrl) throws JsonProcessingException {
         IntegrationTestResult testResult = new IntegrationTestResult();
-
 
         ToDoTestResult toDoTestResult = testCreateToDo(baseUrl);
         testResult.addTodoItem(toDoTestResult);
@@ -63,12 +54,7 @@ public class IntegrationService {
         bracersTestResult = testValidataBrackets(baseUrl, "([)]", false);
         testResult.addBracersItem(bracersTestResult);
 
-        boolean isCorrect = true;
-        boolean existToDoError = testResult.getTodo().stream().anyMatch(result -> !result.isIsCorrect());
-        if (!existToDoError) {
-            isCorrect = !(testResult.getBracers().stream().anyMatch(result -> !result.isIsCorrect()));
-        }
-        testResult.setIsCorrect(isCorrect);
+        summarize(testResult);
 
         return testResult;
     }
@@ -136,7 +122,7 @@ public class IntegrationService {
 
         BracersTestResult result = new BracersTestResult();
         result.setInput("GET " + "/tasks/validateBrackets?input=" + inputString);
-        result.setIsCorrect(balanceTestResult.isIsBalanced().booleanValue() == expected);
+        result.setIsCorrect(balanceTestResult.isIsBalanced() == expected);
         result.setResult(balanceTestResult.isIsBalanced());
         result.setExpected(expected);
 
@@ -152,5 +138,14 @@ public class IntegrationService {
         item.setCreatedAt(sdf.format(toDo.getCreatedAt()));
 
         return item;
+    }
+
+    private void summarize(IntegrationTestResult testResult) {
+        boolean isCorrect = true;
+        boolean existToDoError = testResult.getTodo().stream().anyMatch(result -> !result.isIsCorrect());
+        if (!existToDoError) {
+            isCorrect = testResult.getBracers().stream().allMatch(result -> result.isIsCorrect());
+        }
+        testResult.setIsCorrect(isCorrect);
     }
 }

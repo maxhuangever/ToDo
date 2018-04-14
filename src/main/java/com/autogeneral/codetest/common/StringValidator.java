@@ -2,7 +2,6 @@ package com.autogeneral.codetest.common;
 
 import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
 import com.autoGeneral.codeTest.model.rest.ToDoItemValidationErrorDetails;
-import com.autogeneral.codetest.exception.ToDoItemValidationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +25,11 @@ public class StringValidator {
     @Value("${ToDoItem.text.maxLength}")
     private int textMaxLength;
 
-    public ToDoItemValidationError validateBracketsStr(String str){
+    public ToDoItemValidationError validateBracketsStr(String str) {
         return validateStr("input", str, bracketsStrMinLength, bracketsStrMaxLength);
     }
 
-    public ToDoItemValidationError validateToDoItemText(String str){
+    public ToDoItemValidationError validateToDoItemText(String str) {
         return validateStr("text", str, textMinLength, textMaxLength);
     }
 
@@ -39,7 +38,7 @@ public class StringValidator {
             ToDoItemValidationErrorDetails errorDetails = new ToDoItemValidationErrorDetails();
             errorDetails.setLocation("params");
             errorDetails.setParam(paramName);
-            errorDetails.setMsg("Must be between "+ minLength +" and "+ maxLength +" chars long");
+            errorDetails.setMsg("Must be between " + minLength + " and " + maxLength + " chars long");
             errorDetails.setValue(input);
 
             List<ToDoItemValidationErrorDetails> detailsList = new ArrayList<>();

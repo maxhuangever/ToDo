@@ -21,8 +21,8 @@ public class ToDoService {
 
     public ToDo getTodoById(int id) {
         ToDo entity = toDoRepository.findOne(id);
-        if(entity == null){
-            throw new ToDoItemNotFoundException("Item with "+ id + " not found.");
+        if (entity == null) {
+            throw new ToDoItemNotFoundException("Item with " + id + " not found.");
         }
 
         return entity;
@@ -30,8 +30,8 @@ public class ToDoService {
 
     public ToDo uploadTodo(ToDo todo) {
         ToDo entity = toDoRepository.findOne(todo.getId());
-        if(entity == null){
-            throw new ToDoItemNotFoundException("Item with "+ todo.getId() + " not found.");
+        if (entity == null) {
+            throw new ToDoItemNotFoundException("Item with " + todo.getId() + " not found.");
         }
 
         if (todo.getText() != null) {

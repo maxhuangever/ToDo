@@ -6,12 +6,10 @@ import com.autogeneral.codetest.exception.ToDoItemValidationException;
 import com.autogeneral.codetest.model.ToDo;
 import com.autogeneral.codetest.service.ToDoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class ToDoController{
+public class ToDoController {
     @Autowired
     private ToDoService todoService;
 

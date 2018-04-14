@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ExceptionAdvice{
+public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
     ResponseEntity<ToDoItemValidationError> handleToDoItemValidationException(ToDoItemValidationException ex) {
         return new ResponseEntity<ToDoItemValidationError>(
