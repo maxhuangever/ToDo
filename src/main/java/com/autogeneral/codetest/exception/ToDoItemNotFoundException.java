@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoItemNotFoundException extends BaseException {
+    private static String DEFAULT_ERROR_NAME= "NotFoundError";
+
     private ToDoItemNotFoundError toDoItemNotFoundError;
 
     public ToDoItemNotFoundException(String message) {
@@ -22,7 +24,7 @@ public class ToDoItemNotFoundException extends BaseException {
 
         String errorName = toDoItemNotFoundError.getName();
         if (errorName == null || errorName.trim().length() == 0) {
-            toDoItemNotFoundError.setName("NotFoundError");
+            toDoItemNotFoundError.setName(DEFAULT_ERROR_NAME);
         }
     }
 

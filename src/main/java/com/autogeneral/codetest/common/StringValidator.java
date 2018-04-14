@@ -26,15 +26,15 @@ public class StringValidator {
     @Value("${ToDoItem.text.maxLength}")
     private int textMaxLength;
 
-    public void validateBracketsStr(String str){
-        validateStr("input", str, bracketsStrMinLength, bracketsStrMaxLength);
+    public ToDoItemValidationError validateBracketsStr(String str){
+        return validateStr("input", str, bracketsStrMinLength, bracketsStrMaxLength);
     }
 
-    public void validateToDoItemText(String str){
-        validateStr("text", str, textMinLength, textMaxLength);
+    public ToDoItemValidationError validateToDoItemText(String str){
+        return validateStr("text", str, textMinLength, textMaxLength);
     }
 
-    private void validateStr(String paramName, String input, int minLength, int maxLength) {
+    private ToDoItemValidationError validateStr(String paramName, String input, int minLength, int maxLength) {
         if (input == null || input.length() < minLength || input.length() > maxLength) {
             ToDoItemValidationErrorDetails errorDetails = new ToDoItemValidationErrorDetails();
             errorDetails.setLocation("params");
@@ -48,7 +48,24 @@ public class StringValidator {
             ToDoItemValidationError error = new ToDoItemValidationError();
             error.setDetails(detailsList);
 
-            throw new ToDoItemValidationException(error);
+            return error;
         }
+        return null;
+    }
+
+    public void setBracketsStrMinLength(int bracketsStrMinLength) {
+        this.bracketsStrMinLength = bracketsStrMinLength;
+    }
+
+    public void setBracketsStrMaxLength(int bracketsStrMaxLength) {
+        this.bracketsStrMaxLength = bracketsStrMaxLength;
+    }
+
+    public void setTextMinLength(int textMinLength) {
+        this.textMinLength = textMinLength;
+    }
+
+    public void setTextMaxLength(int textMaxLength) {
+        this.textMaxLength = textMaxLength;
     }
 }

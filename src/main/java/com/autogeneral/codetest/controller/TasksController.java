@@ -1,7 +1,9 @@
 package com.autogeneral.codetest.controller;
 
 import com.autoGeneral.codeTest.model.rest.BalanceTestResult;
+import com.autoGeneral.codeTest.model.rest.ToDoItemValidationError;
 import com.autogeneral.codetest.common.StringValidator;
+import com.autogeneral.codetest.exception.ToDoItemValidationException;
 import com.autogeneral.codetest.service.ValidateBracketsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,10 @@ public class TasksController {
 
     @GetMapping(path = "/tasks/validateBrackets")
     public BalanceTestResult validateBrackets(@RequestParam String input) {
-        stringValidator.validateBracketsStr(input);
+        ToDoItemValidationError error = stringValidator.validateBracketsStr(input);
+        if (error != null) {
+            throw new ToDoItemValidationException(error);
+        }
 
         boolean isBalanced = validateBracketsService.checkBalance(input);
 
