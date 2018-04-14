@@ -1,52 +1,183 @@
-# Polls App
-  
+# ToDo code test app #
+
+## Features ##
+  **-implemented with spring boot + java 8**<br>
+  **-implemented /tasks, /todo and /integrationTest endpoints**<br>
+  **-unit tests implemented**<br>
+  **-integration test implemented**<br>
+  **-support Hibernate ORM mapping to H2 database**<br>
+  **-support swagger code gen plugin**<br>
+  **-Maven build**<br>
+
 # start it
-  mvn clean package  
-  java -jar polls-0.1.0.jar
+  mvn clean package<br>
   
-# Features  
-  **-Maven build**  
-  **-support ORM mapping to a H2 in memory database**  
-  **-support CORS**  
-  **-Spring Boot controller test case**  
+  java -jar codeTest-0.1.0.jar<br>
+  
+# endpoints:  
 
-# sample urls:  
-## retrieveEntryPoint
-url:  
-http://localhost:8080/  
-method:  
-get  
+## Create a to do item
+url:  <br>
+`/todo`<br>
 
-## create new question
-url:  
-http://localhost:8080/questions?page=1  
-method:  
-post  
-request body:  
-{  
-  "question": "Favourite programming language?",  
-  "choices": [  
-    "Swift",  
-    "Python",  
-    "Objective-C",  
-    "Ruby"  
-  ]  
-}  
+method:<br>
+`post`<br>
 
-## getQuestionDetail
-url:  
-http://localhost:8080/questions/5  
-method:  
-get  
+request:<br>
+`{
+  "text": "Text to be created."
+}`
 
-## listAllQuestions
-url:  
-http://localhost:8080/questions?page=1  
-method:  
-get  
+return:
+```
+{
+    "id": 1,
+    "text": "Text to be created.",
+    "isCompleted": false,
+    "createdAt": "2018-04-14T04:02:01Z"
+}
+```
 
-## vote
-url:  
-http://localhost:8080/questions/1/choices/1  
-method:  
-post  
+## Retrieve a specific item by id
+url:<br>
+`/todo/{id}`<br>
+
+method:<br>
+`get`<br>
+
+request:<br>
+
+return:
+```
+{
+    "id": 1,
+    "text": "Text to be created.",
+    "isCompleted": false,
+    "createdAt": "2018-04-14T04:02:01Z"
+}
+```
+
+## Modify an item
+url:<br>
+`/todo/{id}`<br>
+
+method:<br>
+`patch`<br>
+
+request:<br>
+```
+{
+  "text": "Text to be updated.",
+  "isCompleted": true
+}
+```
+
+return:
+```
+{
+    "id": 1,
+    "text": "Text to be updated.",
+    "isCompleted": true,
+    "createdAt": "2018-04-14T04:02:01Z"
+}
+```
+<br>
+
+## Checks if brackets in a string are balanced
+url:<br>
+`/validateBrackets`<br>
+
+method:<br>
+`get`<br>
+
+request:<br>
+`"input=wfs'fs[{{{(s;dkls(dslkf)s;dlkf}]}]}}}sd"`<br>
+
+return:
+```
+{
+     "input": "wfs'fs[{{{(s;dkls(dslkf)s;dlkf}]}]}}}sd",
+     "isBalanced": false
+ }
+```
+
+## Run integration tests against remote API
+url:<br>
+`/integrationTest`<br>
+
+method:<br>
+`get`<br>
+
+request:<br>
+`"url=http://localhost:8080"`<br>
+
+return:<br>
+```
+{
+     "bracers": [
+         {
+             "input": "GET /tasks/validateBrackets?input=([])",
+             "result": true,
+             "expected": true,
+             "isCorrect": true
+         },
+         {
+             "input": "GET /tasks/validateBrackets?input=([)]",
+             "result": false,
+             "expected": false,
+             "isCorrect": true
+         }
+     ],
+     "todo": [
+         {
+             "input": "POST http://localhost:8090/todo",
+             "result": {
+                 "id": 1,
+                 "text": "sample text",
+                 "isCompleted": false,
+                 "createdAt": "2018-04-14T17:22:36Z"
+             },
+             "expected": {
+                 "id": 1,
+                 "text": "sample text",
+                 "isCompleted": false,
+                 "createdAt": "2018-04-14T17:21:06Z"
+             },
+             "isCorrect": true
+         },
+         {
+             "input": "GET http://localhost:8090/todo/1",
+             "result": {
+                 "id": 1,
+                 "text": "sample text",
+                 "isCompleted": false,
+                 "createdAt": "2018-04-14T17:22:36Z"
+             },
+             "expected": {
+                 "id": 1,
+                 "text": "sample text",
+                 "isCompleted": false,
+                 "createdAt": "2018-04-14T17:21:06Z"
+             },
+             "isCorrect": true
+         },
+         {
+             "input": "PATCH http://localhost:8090/todo/1",
+             "result": {
+                 "id": 1,
+                 "text": "new text",
+                 "isCompleted": true,
+                 "createdAt": "2018-04-14T17:22:36Z"
+             },
+             "expected": {
+                 "id": 1,
+                 "text": "new text",
+                 "isCompleted": true,
+                 "createdAt": "2018-04-14T17:22:36Z"
+             },
+             "isCorrect": true
+         }
+     ],
+     "isCorrect": true
+ }
+```
