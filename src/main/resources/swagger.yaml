@@ -135,7 +135,64 @@ paths:
           description: Not Found Error
           schema:
             $ref: '#/definitions/ToDoItemNotFoundError'
+  /integrationTest:
+    get:
+      tags:
+        - test
+      summary: Run integration tests against remote API
+      schemes:
+        - http
+        - https
+      produces:
+        - application/json
+      parameters:
+        - name: url
+          in: query
+          description: base url of remote API to test
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/IntegrationTestResult'
 definitions:
+  IntegrationTestResult:
+    type: object
+    properties:
+      bracers:
+        type: array
+        items:
+          $ref: '#/definitions/BracersTestResult'
+      todo:
+        type: array
+        items:
+          $ref: '#/definitions/ToDoTestResult'
+      isCorrect:
+        type: boolean
+        example: true
+  BracersTestResult:
+    type: object
+    properties:
+      input:
+        type: string
+      result:
+        type: boolean
+      expected:
+        type: boolean
+      isCorrect:
+        type: boolean
+  ToDoTestResult:
+    type: object
+    properties:
+      input:
+        type: string
+      result:
+        $ref: '#/definitions/ToDoItem'
+      expected:
+        $ref: '#/definitions/ToDoItem'
+      isCorrect:
+        type: boolean
   BalanceTestResult:
     type: object
     properties:
