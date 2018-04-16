@@ -4,7 +4,7 @@
   **-implemented with spring boot + java 8**<br>
   **-support /tasks, /todo and /integrationTest endpoints**<br>
   **-support unit tests**<br>
-  **-support integration test**<br>
+  **-passed integration test**<br>
   **-support JPA ORM mapping to H2 database**<br>
   **-support swagger code generation plugin**<br>
   **-Maven build**<br>
@@ -104,88 +104,5 @@ return:
 {
      "input": "wfs'fs[{{{(s;dkls(dslkf)s;dlkf}]}]}}}sd",
      "isBalanced": false
- }
-```
-
-## Run integration tests against remote API
-**Notice:**IntegrationTest endpoint does not require ```createAt field``` in ```result``` and ```expected``` have same value.<br>
-
-url:<br>
-`/integrationTest`<br>
-
-method:<br>
-`get`<br>
-
-request:<br>
-`"url=http://localhost:8080"`<br>
-
-return:<br>
-```
-{
-     "bracers": [
-         {
-             "input": "GET /tasks/validateBrackets?input=([])",
-             "result": true,
-             "expected": true,
-             "isCorrect": true
-         },
-         {
-             "input": "GET /tasks/validateBrackets?input=([)]",
-             "result": false,
-             "expected": false,
-             "isCorrect": true
-         }
-     ],
-     "todo": [
-         {
-             "input": "POST http://localhost:8090/todo",
-             "result": {
-                 "id": 1,
-                 "text": "sample text",
-                 "isCompleted": false,
-                 "createdAt": "2018-04-14T17:22:36Z"
-             },
-             "expected": {
-                 "id": 1,
-                 "text": "sample text",
-                 "isCompleted": false,
-                 "createdAt": "2018-04-14T17:21:06Z"
-             },
-             "isCorrect": true
-         },
-         {
-             "input": "GET http://localhost:8090/todo/1",
-             "result": {
-                 "id": 1,
-                 "text": "sample text",
-                 "isCompleted": false,
-                 "createdAt": "2018-04-14T17:22:36Z"
-             },
-             "expected": {
-                 "id": 1,
-                 "text": "sample text",
-                 "isCompleted": false,
-                 "createdAt": "2018-04-14T17:21:06Z"
-             },
-             "isCorrect": true
-         },
-         {
-             "input": "PATCH http://localhost:8090/todo/1",
-             "result": {
-                 "id": 1,
-                 "text": "new text",
-                 "isCompleted": true,
-                 "createdAt": "2018-04-14T17:22:36Z"
-             },
-             "expected": {
-                 "id": 1,
-                 "text": "new text",
-                 "isCompleted": true,
-                 "createdAt": "2018-04-14T17:22:36Z"
-             },
-             "isCorrect": true
-         }
-     ],
-     "isCorrect": true
  }
 ```
