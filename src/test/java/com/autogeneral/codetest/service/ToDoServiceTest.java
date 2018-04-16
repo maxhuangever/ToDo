@@ -30,7 +30,7 @@ public class ToDoServiceTest {
     @MockBean
     private ToDoRepository toDoRepository;
 
-    private static int id = 1;
+    private static long id = 1L;
     private static String text = "test text";
 
     @Test

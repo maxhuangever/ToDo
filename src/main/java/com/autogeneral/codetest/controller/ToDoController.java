@@ -27,12 +27,12 @@ public class ToDoController {
     }
 
     @GetMapping(path = "/todo/{id}")
-    public ToDo getTodo(@PathVariable("id") int id) {
+    public ToDo getTodo(@PathVariable("id") long id) {
         return todoService.getTodoById(id);
     }
 
     @PatchMapping(path = "/todo/{id}")
-    public ToDo updateTodo(@PathVariable("id") int id, @RequestBody ToDo todo) {
+    public ToDo updateTodo(@PathVariable("id") long id, @RequestBody ToDo todo) {
         String toDoText = todo.getText();
         if(toDoText!=null) {
             ToDoItemValidationError error = stringValidator.validateToDoItemText(toDoText);

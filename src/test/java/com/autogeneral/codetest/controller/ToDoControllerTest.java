@@ -40,7 +40,7 @@ public class ToDoControllerTest {
     @MockBean
     private StringValidator stringValidator;
 
-    private static int id = 1;
+    private static long id = 1L;
     private static String text = "test text";
 
     @Test
@@ -81,7 +81,7 @@ public class ToDoControllerTest {
     public void givenValidId_whenGetTodo_thenReturnData()
             throws Exception {
         //given
-        int id = 1;
+        long id = 1L;
         ToDo toDo = new ToDo(text);
         given(todoService.getTodoById(id)).willReturn(toDo);
 
@@ -96,7 +96,7 @@ public class ToDoControllerTest {
     public void givenInvalidId_whenGetTodo_thenReturn404Error()
             throws Exception {
         //given
-        int id = 1;
+        long id = 1L;
         given(todoService.getTodoById(id)).willThrow(ToDoItemNotFoundException.class);
 
         //when

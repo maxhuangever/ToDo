@@ -19,7 +19,7 @@ public class ToDoService {
         return toDoRepository.save(todo);
     }
 
-    public ToDo getTodoById(int id) {
+    public ToDo getTodoById(long id) {
         ToDo entity = toDoRepository.findOne(id);
         if (entity == null) {
             throw new ToDoItemNotFoundException("Item with " + id + " not found.");
