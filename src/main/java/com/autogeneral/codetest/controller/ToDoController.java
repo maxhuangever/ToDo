@@ -33,9 +33,12 @@ public class ToDoController {
 
     @PatchMapping(path = "/todo/{id}")
     public ToDo updateTodo(@PathVariable("id") int id, @RequestBody ToDo todo) {
-        ToDoItemValidationError error = stringValidator.validateToDoItemText(todo.getText());
-        if (error != null) {
-            throw new ToDoItemValidationException(error);
+        String toDoText = todo.getText();
+        if(toDoText!=null) {
+            ToDoItemValidationError error = stringValidator.validateToDoItemText(toDoText);
+            if (error != null) {
+                throw new ToDoItemValidationException(error);
+            }
         }
 
         todo.setId(id);
